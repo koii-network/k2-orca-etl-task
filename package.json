@@ -9,6 +9,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "orca-pulse": "^0.0.6"
+    "fs": "^0.0.1-security",
+    "orca-pulse": "^0.0.7",
+    "socket.io-stream": "^0.9.1"
   }
 }
