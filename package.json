@@ -10,7 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "fs": "^0.0.1-security",
-    "orca-pulse": "^0.0.8",
+    "orca-pulse": "^0.0.9",
     "socket.io-stream": "^0.9.1"
   }
 }
