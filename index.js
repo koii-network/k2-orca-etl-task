@@ -32,13 +32,9 @@ orca.initialize(
     'wss://localhost:3003',
   ).then(() => {
     res = orca.podCall('api/todos', {
-
-      body:{
         'title': 'test',
         'description': 'test',
         'completed': 'false',
-      },
-      route: "api/todos"
       }).then(res => {
       
         console.log("logging http request response", res)
@@ -76,7 +72,8 @@ orca.initialize(
         console.log("stream error",error)
       })
       
-
+     setTimeout(()=>
+     orca.close(),30000)
   }).catch((error)=>{
 
   })
