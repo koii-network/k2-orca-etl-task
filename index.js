@@ -4,13 +4,7 @@ const { OrcaPulse } = require('orca-pulse');
 const fs = require('fs')
 const ss = require('socket.io-stream');
 
-// const orca = new OrcaPulse({
-//   orcaApiKey: '366e3ab5-6fa3-4299-99de-150c4505f9b9',
-//   // podImageUrl: 'docker.io/nginxinc/nginx-unprivileged',
-//     podImageUrl: 'docker.io/avi17/node-app-http-docker:v0',
-//   podId: 'taskid1234',
-//   orcaUrl: 'wss://localhost:3003',
-// });
+
 
 
 // orca.initialize({
@@ -26,10 +20,10 @@ const orca = new OrcaPulse()
 
 
 orca.initialize(
-    '366e3ab5-6fa3-4299-99de-150c4505f9b9',
+     '366e3ab5-6fa3-4299-99de-150c4505f9b9',
      'docker.io/avi17/healthz-test:0.0',
      'taskid1234',
-    'wss://localhost:3003',
+     'wss://localhost:3003',
   ).then(() => {
     res = orca.podCall('api/todos', {
         'title': 'test',
@@ -37,18 +31,18 @@ orca.initialize(
         'completed': 'false',
       }).then(res => {
       
-        console.log("logging http request response", res)
+         console.log("logging http request response", res)
       }).catch(err => {
       
-        console.log("logging error for http",err)
+         console.log("logging error for http",err)
       })
       
-      orca.handle('test', () => {
+    orca.handle('test', () => {
         return;
       });
 
-  fileStream = fs.createReadStream("./test.txt") 
-  // console.log(fileStream)   
+    fileStream = fs.createReadStream("./test.txt") 
+   
       
   writeFileStreamData = {    
     stream: fileStream, 
@@ -62,7 +56,6 @@ orca.initialize(
       nameofFileToStream="test.txt"
       filePathInOutDirectory = "/test1.txt"
       var stream = ss.createStream();
-      // get list of files
       stream = orca.podCall("readFileStream",filePathInOutDirectory).then((stream, response)=>{
         // console.log("stream value",stream)
         stream.pipe(fs.createWriteStream(nameofFileToStream));
@@ -74,7 +67,7 @@ orca.initialize(
       
      setTimeout(()=>
      orca.close(),30000)
-  }).catch((error)=>{
+    }).catch((error)=>{
 
   })
 
