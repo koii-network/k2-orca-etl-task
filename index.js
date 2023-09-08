@@ -6,7 +6,6 @@ const orca = new OrcaPulse()
 const process = require('process')
 
 orca.initialize(
-   '366e3ab5-6fa3-4299-99de-150c4505f9b9',
    'docker.io/1703706/cryo:v1-slim ',
    'taskid1234',
    'wss://localhost:3003',
@@ -31,9 +30,9 @@ orca.initialize(
 
    setTimeout(() =>
       {
-         // orca.close()
-         // process.exit()
-      }, 3000)
+         orca.close()
+         process.exit()
+      }, 5000)
 }).catch((error) => {
 console.log("inside catch error", error)
 })
