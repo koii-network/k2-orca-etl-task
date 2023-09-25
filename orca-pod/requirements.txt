@@ -1,0 +1,7 @@
+blinker==1.6.2
+click==8.1.7
+cryo_python==0.2.0
+Flask==2.3.3
+maturin==1.2.3
+polars==0.18.15
+pyarrow
