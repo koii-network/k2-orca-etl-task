@@ -4,8 +4,10 @@ const {
   namespaceWrapper,
   taskNodeAdministered,
 } = require('./namespaceWrapper');
+const {OrcaPulse} = require('orca-pulse')
 
 
+ 
 /**
  * setup
  * @description sets up the task node, particularly the inter-process communication to start and stop the task
@@ -14,6 +16,16 @@ const {
 async function setup() {
   console.log('setup function called');
   // Run default setup
+  const orcaPulse = new OrcaPulse()  
+  await orcaPulse.initialize(
+    'docker.io/1703706/cryo:v1-slim ',
+    'taskid1234',
+    'ws://host.docker.internal:3003',
+    // certificate,
+    '30000'
+    )
+   
+
   await namespaceWrapper.defaultTaskSetup();
   process.on('message', m => {
     console.log('CHILD got message:', m);
@@ -25,7 +37,7 @@ async function setup() {
       coreLogic.auditTask(m.roundNumber);
     } else if (m.functionCall == 'executeTask') {
       console.log('executeTask called');
-      coreLogic.task();
+      coreLogic.task(orcaPulse);
     } else if (m.functionCall == 'generateAndSubmitDistributionList') {
       console.log('generateAndSubmitDistributionList called');
       coreLogic.submitDistributionList(m.roundNumber);
@@ -39,6 +51,7 @@ async function setup() {
 
 if (taskNodeAdministered) {
   setup();
+  
 }
 
 if (app) {
@@ -56,3 +69,8 @@ if (app) {
   });
   app.use('/api/', require('./routes') );
 }
+// const orcaPulseObject = this.orcaPulse
+
+// module.exports={
+//   orcaPulse
+// }
