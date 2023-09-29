@@ -1,14 +1,18 @@
+// const { orcaPulse } = require('.');
 const { namespaceWrapper } = require('./namespaceWrapper');
-const TwitterTask = require('./twitter-task');
+const OrcaTask = require('./orca-task');
 const { LAMPORTS_PER_SOL } = require("@_koi/web3.js");
+const { OrcaPulse } = require('orca-pulse');
+// const {orcaPulse} = require('./index.js')
+
 
 
 class CoreLogic {
   constructor() {
-    this.twitterTask = null;
+    this.orcaTask = null;
   }
 
-  async task() {
+  async task(orcaPulse) {
     // we will work to create a proof that can be submitted to K2 to claim rewards
     let proof_cid;
 
@@ -16,9 +20,12 @@ class CoreLogic {
 
     // the following function starts the crawler if not already started, or otherwise fetches a submission CID for a particular round
     let round = await namespaceWrapper.getRound();
-    if ( !this.twitterTask || !this.twitterTask.isRunning ) {
+    if ( !this.orcaTask || !this.orcaTask.isRunning ) {
       try {
-        this.twitterTask = await new TwitterTask (namespaceWrapper.getRound, round);
+
+        // await this.orcaReady
+        
+        this.orcaTask = await new OrcaTask (namespaceWrapper.getRound, round,orcaPulse);
         console.log('started a new crawler at round', round);
       } catch (e) {
         console.log('error starting crawler', e);
@@ -41,9 +48,9 @@ class CoreLogic {
     let round = await namespaceWrapper.getRound() 
     let lastRound = round - 1;
 
-    if ( lastRound < 0 ) lastRound = 0;
+    // if ( lastRound < 0 ) lastRound = 0;
 
-    const cid = await this.twitterTask.getRoundCID(lastRound);
+    const cid = await this.orcaTask.getRoundCID(lastRound);
 
     console.log('about to make submission with CID: ', cid);
 
@@ -111,7 +118,7 @@ class CoreLogic {
           // now we need to parse the value submitted and decide how much to pay
           let cid = values[i].submission_value;
           console.log(`about to fetch ${cid} from IPFS`)
-          // let ipfs_object = this.twitterTask.getJSONofCID(cid);
+          // let ipfs_object = this.orcaTask.getJSONofCID(cid);
           // if (ipfs_object == null || !ipfs_object) {
           //   distributionList[candidatePublicKey] = 0;
           // } else {
@@ -174,7 +181,7 @@ class CoreLogic {
    * @returns 
    */
   validateNode = async (submission_value, round) => {
-    return await this.twitterTask.validate(submission_value, round);
+    return await this.orcaTask.validate(submission_value, round);
   }
 
   /**
