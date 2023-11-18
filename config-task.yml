@@ -43,7 +43,7 @@ requirementsTags:
     value: '5 GB'
   - type: STORAGE
     value: '5 GB'
-  - type: GLOBAL_VARIABLE
+  - type: ADDON
     value: 'ORCA_TASK'
 
 # OPTIONAL variables variables for creating task / REQUIRED variables for update task
