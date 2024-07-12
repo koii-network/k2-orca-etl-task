@@ -4,3 +4,5 @@ dist/*
 localKOIIDB.db
 metadata.json
 taskStateInfoKeypair.json
+namespace
+config

@@ -1,3 +1,0 @@
-{"$$indexCreated":{"fieldName":"runningId","unique":true,"sparse":true}}
-{"$$indexCreated":{"fieldName":"ipfsId","unique":true,"sparse":true}}
-{"$$indexCreated":{"fieldName":"proof","unique":true,"sparse":true}}
