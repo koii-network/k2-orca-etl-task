@@ -21,7 +21,6 @@ async function setup() {
     'docker.io/1703706/cryo:v1-slim ',
     'taskid1234',
     'ws://host.docker.internal:3003',
-    // certificate,
     '30000'
     )
    
