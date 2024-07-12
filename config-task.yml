@@ -1,7 +1,7 @@
 # Name and metadata of your task
-task_name: 'Twitter Crawler v5'
-author: 'Soma'
-description: 'This task volunteers your spare Twitter account to help us archive the #koii hashtag community. Or provide the keyword that you would like get. This is a not-for-profit endeavor, sponsored by the Koii Foundation :). Before start running the task please ensure your volunteer Twitter account has passed the Twitter verification process.'
+task_name: 'Orca ETL TASK'
+author: 'Orca'
+description: 'ORCA ETL TASK'
 repositoryUrl: 'https://github.com/koii-network/task-examples'
 imageUrl: 'imageUrl'
 
@@ -31,35 +31,25 @@ bounty_amount_per_round: 1
 allowed_failed_distributions: 3
 
 #Space in MBs for the account size, that holds the task data
-space: 1
+space: 5
 
 # Note that the value field in RequirementTag is optional, so it is up to you to include it or not based on your use case.
 # To add more global variables and task variables, please refer the type,value,description format shown below
 
 requirementsTags:
-  - type: TASK_VARIABLE
-    value: 'WEB3STORAGE_TOKEN'
-    description: 'To upload the executable to IPFS, you will need a web3 storage key. You can obtain one for yourself by following the tutorial at https://blog.koii.network/Introduce-web3-storage/. This tutorial will guide you on how to get the required web3 storage key for IPFS uploading.'
-  - type: TASK_VARIABLE
-    value: 'KEYWORD'
-    description: 'The keyword to search for in Twitter.'
-  - type: TASK_VARIABLE
-    value: 'TWITTER_USERNAME'
-    description: 'The username of your volunteer Twitter account.'
-  - type: TASK_VARIABLE
-    value: 'TWITTER_PASSWORD'
-    description: 'The password of your volunteer Twitter account.'
   - type: CPU
     value: '4-core'
   - type: RAM
-    value: '5 GB'
+    value: '4 GB'
   - type: STORAGE
-    value: '5 GB'
+    value: '4 GB'
+  - type: ADDON
+    value: 'ORCA_TASK'
 
 # OPTIONAL variables variables for creating task / REQUIRED variables for update task
 
 # OPTIONAL Only provide the taskId if you are updating the task otherwise leave blank
-task_id: '9cQSLCR4LrqqqiZjDRveBBngKPbeBPvVTah7NBYgbPvM'
+task_id: ''
 
 # Provide the description for changes made in new version of task
-migrationDescription: 'Release v5 of the Twitter Crawler task. This version adds the ability to specify the keyword to search for in Twitter. Also the task is more stable now.'
+migrationDescription: ''
