@@ -1,6 +1,6 @@
 import Orca from "./adapters/orca/orca.js";
 import "dotenv/config";
-import axios from "axios";
+import { KoiiStorageClient } from "@_koii/storage-task-sdk";
 
 // const orca = new OrcaPulse()
 
@@ -196,20 +196,15 @@ class OrcaTask {
  * @param {*} cid
  * @returns promise<JSON>
  */
-const getJSONFromCID = async (cid) => {
-	return new Promise((resolve, reject) => {
-		let url = `https://${cid}.ipfs.dweb.link/data.json`;
-		// console.log('making call to ', url)
-		axios.get(url).then((response) => {
-			if (response.status !== 200) {
-				console.log("error", response);
-				reject(response);
-			} else {
-				// console.log('response', response)
-				resolve(response.data);
-			}
-		});
-	});
+const getJSONFromCID = async (cid, filename = "data.json") => {
+	try {
+		const client = KoiiStorageClient.getInstance();
+		const fileBlob = await client.getFile(cid, filename);
+		return JSON.parse(await fileBlob.text());
+	} catch (error) {
+		console.error("Error getting file from IPFS:", error);
+		throw error;
+	}
 };
 
 export default OrcaTask;

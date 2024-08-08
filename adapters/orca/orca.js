@@ -2,9 +2,9 @@
 import Adapter from "../../model/adapter.js";
 import PCR from "puppeteer-chromium-resolver";
 import cheerio from "cheerio";
-const { Web3Storage, File } = require("web3.storage");
 import Data from "../../model/data.js";
-const { namespaceWrapper } = require("@_koii/namespace-wrapper");
+import { namespaceWrapper } from "@_koii/namespace-wrapper";
+import { KoiiStorageClient } from "@_koii/storage-task-sdk";
 
 /**
  * Twitter
@@ -235,7 +235,7 @@ class Orca extends Adapter {
 			} else {
 				const file = await makeFileFromObjectWithName(data, "round:" + round);
 				// TEST USE
-				const cid = await storeFiles([file]);
+				const cid = await storeFiles(file);
 				// const cid = "cid"
 				await this.proofs.create({
 					id: "proof:" + round,
@@ -361,30 +361,6 @@ class Orca extends Adapter {
 		}
 	};
 
-	// crawl = async query => {
-	//   while (true) {
-	//     console.log('valid? ', this.sessionValid);
-	//     if (this.sessionValid == true) {
-	//       await this.fetchList(query.query, query.round);
-	//       await new Promise(resolve => setTimeout(resolve, 300000)); // If the error message is found, wait for 5 minutes, refresh the page, and continue
-	//     } else {
-	//       await this.negotiateSession();
-	//     }
-	//   }
-	// };
-
-	// orcaPulse.podCall('collect', {
-	//   headers: {
-	//      'Content-Type': 'application/json'
-	//   },
-	//   body: {
-	//      'datatype': 'blocks',
-	//      'start_block': '100000',
-	//      'end_block': '100005',
-	//      'rpc_url': "https://internal.ethereum.n.chaindeck.io/278e1b2ab91f2ca96f7b8761bf65b9b2"
-	//   },
-	// })
-
 	/**
 	 * fetchList
 	 * @param {string} url
@@ -435,7 +411,7 @@ class Orca extends Adapter {
 						if (!existingItem) {
 							// Store the item in the database
 							const file = await makeFileFromObjectWithName(data);
-							const cid = await storeFiles([file]);
+							const cid = await storeFiles(file);
 							// const cid = 'testcid';
 							this.cids.create({
 								id: data.tweets_id,
@@ -500,36 +476,18 @@ class Orca extends Adapter {
 	};
 }
 
-// TODO - move the following functions to a utils file?
-function makeStorageClient() {
-	return new Web3Storage({ token: getAccessToken() });
-}
-
 async function makeFileFromObjectWithName(obj) {
 	const buffer = Buffer.from(JSON.stringify(obj));
 	return new File([buffer], "data.json", { type: "application/json" });
 }
 
-async function storeFiles(files) {
-	const client = makeStorageClient();
-	const cid = await client.put(files);
-	// console.log('stored files with cid:', cid);
+async function storeFiles(file) {
+	const client = KoiiStorageClient.getInstance();
+	const cid = await client.uploadFile(file);
 	return cid;
 }
 
-function getAccessToken() {
-	// If you're just testing, you can paste in a token
-	// and uncomment the following line:
-	// return 'paste-your-token-here'
-
-	// In a real app, it's better to read an access token from an
-	// environement variable or other configuration that's kept outside of
-	// your code base. For this to work, you need to set the
-	// WEB3STORAGE_TOKEN environment variable before you run your code.
-	return process.env.WEB3STORAGE_TOKEN;
-}
-
-async function orcaPulseInitailize() {
+async function orcaPulseInitialize() {
 	orcaPulse.initialize(
 		"docker.io/1703706/cryo:v1-slim ",
 		"taskid1234",
