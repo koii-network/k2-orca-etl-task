@@ -6,7 +6,7 @@ import cheerio from "cheerio";
 var crypto = require("crypto");
 const { Web3Storage, File } = require("web3.storage");
 import Data from "../../model/data";
-const { namespaceWrapper } = require("../../namespaceWrapper");
+const { namespaceWrapper } = require("../.@_koii/namespace-wrapper");
 const { OrcaPulse } = require("orca-pulse");
 
 /**

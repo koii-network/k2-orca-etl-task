@@ -1,5 +1,5 @@
 // const { orcaPulse } = require('.');
-const { namespaceWrapper } = require("./namespaceWrapper");
+const { namespaceWrapper } = require("@_koii/namespace-wrapper");
 import OrcaTask from "./orca-task";
 const { LAMPORTS_PER_SOL } = require("@_koi/web3.js");
 const { OrcaPulse } = require("orca-pulse");
