@@ -6,3 +6,4 @@ metadata.json
 taskStateInfoKeypair.json
 namespace
 config
+.env
