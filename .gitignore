@@ -7,3 +7,4 @@ taskStateInfoKeypair.json
 namespace
 config
 .env
+package-lock.json
