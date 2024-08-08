@@ -1,9 +1,6 @@
-// const { orcaPulse } = require('.');
-const { namespaceWrapper } = require("@_koii/namespace-wrapper");
+import { namespaceWrapper } from "@_koii/namespace-wrapper";
 import OrcaTask from "./orca-task.js";
-const { LAMPORTS_PER_SOL } = require("@_koii/web3.js");
-const { OrcaPulse } = require("orca-pulse");
-// const {orcaPulse} = require('./index.js')
+import { LAMPORTS_PER_SOL } from "@_koii/web3.js";
 
 class CoreLogic {
 	constructor() {

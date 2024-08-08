@@ -1,4 +1,4 @@
-const { namespaceWrapper } = require("@_koii/namespace-wrapper");
+import { namespaceWrapper } from "@_koii/namespace-wrapper";
 
 /**
  * Data class

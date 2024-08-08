@@ -1,5 +1,5 @@
-const { namespaceWrapper } = require("@_koii/namespace-wrapper");
-import Data from "../model/data";
+import { namespaceWrapper } from "@_koii/namespace-wrapper";
+import Data from "../model/data.js";
 
 /**
  * namespaceWrapper is a class that handles the Twitter crawler and validator
