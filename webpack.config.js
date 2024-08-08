@@ -1,4 +1,4 @@
-module.exports={
+export default {
     entry:"./index.js",
     target: 'node',
     // When uploading to arweave use the production mode
@@ -14,4 +14,4 @@ module.exports={
     node:{
       __dirname: true
     }
-}
+};

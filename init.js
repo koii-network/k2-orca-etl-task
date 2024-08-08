@@ -1,4 +1,4 @@
-const express = require('express');
+import express from 'express';
 const TASK_NAME = process.argv[2] || 'Local';
 const TASK_ID = process.argv[3];
 const EXPRESS_PORT = process.argv[4] || 10000;
@@ -21,7 +21,7 @@ app.listen(EXPRESS_PORT, () => {
   console.log(`${TASK_NAME} listening on port ${EXPRESS_PORT}`);
 });
 
-module.exports = {
+export default {
   app,
   NODE_MODE,
   TASK_ID,

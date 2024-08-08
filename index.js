@@ -1,13 +1,10 @@
-const { coreLogic } = require('./coreLogic');
-const { app } = require('./init');
-const {
-  namespaceWrapper,
-  taskNodeAdministered,
-} = require('./namespaceWrapper');
-const {OrcaPulse} = require('orca-pulse')
+import {coreLogic} from './coreLogic';
+import {app} from './init';
+import {namespaceWrapper, taskNodeAdministered} from './namespaceWrapper';
+import {OrcaPulse} from 'orca-pulse';
 
 
- 
+
 /**
  * setup
  * @description sets up the task node, particularly the inter-process communication to start and stop the task

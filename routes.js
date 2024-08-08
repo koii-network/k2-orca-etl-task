@@ -1,6 +1,7 @@
 // TODO, can this file be deleted?
 
-const express = require('express');
+import express from 'express';
+
 const router = express.Router();
 
 // Sample data
@@ -15,4 +16,4 @@ router.get('/', (req, res) => {
   res.json(users);
 });
 
-module.exports = router;
+export default router;

@@ -1,16 +1,15 @@
-const Twitter = require('./adapters/twitter/twitter.js');
-const db = require('./helpers/db');
-const { Web3Storage } = require('web3.storage');
-const Data = require('./model/data');
-const dotenv = require('dotenv');
-const { default: axios } = require('axios');
-
-const { OrcaPulse } = require('orca-pulse');
-const fs = require('fs')
-const ss = require('socket.io-stream');
+import Twitter from './adapters/twitter/twitter.js';
+import db from './helpers/db';
+import {Web3Storage} from 'web3.storage';
+import Data from './model/data';
+import dotenv from 'dotenv';
+import axios from 'axios';
+import {OrcaPulse} from 'orca-pulse';
+import fs from 'fs';
+import ss from 'socket.io-stream';
 
 const orca = new OrcaPulse()
-const process = require('process')
+import process from 'process';
 
 dotenv.config();
 
@@ -223,7 +222,7 @@ class TwitterTask {
   }
 }
 
-module.exports = TwitterTask;
+export default TwitterTask;
 
 /**
  * getJSONFromCID
