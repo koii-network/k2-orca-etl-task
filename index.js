@@ -1,5 +1,5 @@
-import { coreLogic } from "./coreLogic";
-import { app } from "./init";
+import coreLogic from "./coreLogic.js";
+import { app } from "./init.js";
 import {
 	namespaceWrapper,
 	taskNodeAdministered,

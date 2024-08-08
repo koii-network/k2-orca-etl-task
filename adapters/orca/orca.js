@@ -1,13 +1,10 @@
 // Import required modules
-import Adapter from "../../model/adapter";
-import puppeteer from "puppeteer";
+import Adapter from "../../model/adapter.js";
 import PCR from "puppeteer-chromium-resolver";
 import cheerio from "cheerio";
-var crypto = require("crypto");
 const { Web3Storage, File } = require("web3.storage");
-import Data from "../../model/data";
-const { namespaceWrapper } = require("../.@_koii/namespace-wrapper");
-const { OrcaPulse } = require("orca-pulse");
+import Data from "../../model/data.js";
+const { namespaceWrapper } = require("@_koii/namespace-wrapper");
 
 /**
  * Twitter
@@ -17,7 +14,7 @@ const { OrcaPulse } = require("orca-pulse");
  * Provides a crawler interface for the data gatherer nodes to use to interact with twitter
  */
 
-class Twitter extends Adapter {
+class Orca extends Adapter {
 	constructor(credentials, db, maxRetry, OrcaPulse) {
 		super(credentials, maxRetry);
 		this.credentials = credentials;
@@ -503,8 +500,6 @@ class Twitter extends Adapter {
 	};
 }
 
-module.exports = Twitter;
-
 // TODO - move the following functions to a utils file?
 function makeStorageClient() {
 	return new Web3Storage({ token: getAccessToken() });
@@ -542,3 +537,5 @@ async function orcaPulseInitailize() {
 		// certificate,
 	);
 }
+
+export default Orca;

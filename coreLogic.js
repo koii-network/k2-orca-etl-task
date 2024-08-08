@@ -1,7 +1,7 @@
 // const { orcaPulse } = require('.');
 const { namespaceWrapper } = require("@_koii/namespace-wrapper");
-import OrcaTask from "./orca-task";
-const { LAMPORTS_PER_SOL } = require("@_koi/web3.js");
+import OrcaTask from "./orca-task.js";
+const { LAMPORTS_PER_SOL } = require("@_koii/web3.js");
 const { OrcaPulse } = require("orca-pulse");
 // const {orcaPulse} = require('./index.js')
 
@@ -326,4 +326,4 @@ class CoreLogic {
 }
 const coreLogic = new CoreLogic();
 
-module.exports = { coreLogic };
+export default coreLogic;

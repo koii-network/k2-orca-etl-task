@@ -1,4 +1,4 @@
-const { namespaceWrapper } = require(".@_koii/namespace-wrapper");
+const { namespaceWrapper } = require("@_koii/namespace-wrapper");
 import Data from "../model/data";
 
 /**
