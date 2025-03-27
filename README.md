@@ -1,68 +1,127 @@
-# Twitter Crawler
+# Twitter Crawler for Koii Network
 
-**Not for illegal use**
+## Project Overview
 
-This tool is designed exclusively for theoretical use in public archival projects and is not intended to be used for for-profit activities.
+The Twitter Crawler is a specialized CLI tool designed for community-driven data archival and gathering tasks within the Koii Network. It enables users to programmatically search, collect, and archive Twitter content using decentralized task execution.
 
-Examples of fair use:
- - tracking your own social media presence
- - archiving or backing up sensitive content to protect against persecution
+🔍 **Key Features:**
+- Automated Twitter content retrieval
+- Configurable search queries
+- Support for recursive content exploration
+- Koii Network task integration
+- Headless browser automation
 
-Examples of bad use:
- - stealing data (i.e. selling large scale analytics)
- - infringing on personal privacy (i.e. "stalking")
+### Use Cases
+- Public archival projects
+- Social media trend analysis
+- Content preservation
+- Academic research
+- Community monitoring
 
-Please consult with a legal professional before engaging in any form of web-crawling or data-gathering activities.
+⚠️ **Ethical Notice:** This tool is intended for legitimate research and archival purposes only. Users must comply with Twitter's Terms of Service and respect individual privacy.
 
-## Koii Tasks
+## Installation
 
-Koii tasks are community based activities where participants run common code on their local machines. This repo provides an example of how to use headless browsers and DOM manipulation to automate user actions, using tasks, to provide new possibilities for community coordination.
+### Prerequisites
+- Node.js (v14+ recommended)
+- Yarn package manager
+- Chrome/Chromium browser
 
-In the Koii architecture, community nodes run tasks and generate 'submissions' which they submit to claim rewards. When a submission is posted to the network, other nodes verify, or 'audit' that submission, and then choose whether to approve rewards. See `twitter-task.js` for the task implementation. 
+### Setup
+```bash
+# Clone the repository
+git clone https://github.com/your-org/twitter-crawler.git
+cd twitter-crawler
 
-## What's in the Project?
-This is an implementation of the default data-gatherer class of Koii tasks.
-
-There are four main components, detailed in the adapter file: `adapters/twitter/twitter.js`
-1. Negotiate Session
-2. Fetch a list
-3. Fetch an item
-4. Fetch a list from an item
-
-The repo also contains a host of test files, most importantly `test/test-one-round.js` which details the full flow of one [gradual consensus](https://docs.koii.network/develop/koii-task-101/what-are-tasks/gradual-consensus) round. 
-
-Run the test with 
+# Install dependencies
+yarn install
 ```
-yarn
-node test/test-one-round.js
+
+## Usage
+
+### Basic Search
+```bash
+# Search Twitter for a specific hashtag
+node twitter-task.js --search "#koii" --limit 100
 ```
 
-## Using The Crawler
-To modify the crawler query, or change how it uses the local database, open `twitter-task.js`.
-
-The `query` object manages the key parts of the crawler.
-```
-let searchTerm = "#koii";
+### Advanced Configuration
+Configure your crawler in `twitter-task.js`:
+```javascript
 let query = {
-    limit: 100, // total number of records to return
-    searchTerm: searchTerm, // the keyword to look for
-    query: `https://twitter.com/search?q=${ searchTerm }&src=typed_query`, // the query string (including said keyword)
-    depth: 3, // the depth of recursive layers to follow 
-    recursive: true, // descend recursively?
-    updateRound: () => {} // a function that returns the current round
-    round: 1 // the current round
+    limit: 100,           // Maximum records to retrieve
+    searchTerm: "#koii",  // Keyword/hashtag to search
+    depth: 3,             // Recursive exploration depth
+    recursive: true       // Enable recursive content gathering
 }
 ```
 
-## Modifying the Task
-Check `task-config.yaml` for the deployment config. 
-
-## Deploying to Koii
-Use the `create-task-cli` to build and deploy your task. 
-
-```
-yarn webpack #builds your task executable
-npx @_koii/create-task-cli@latest #uploads your task executable to IPFS and starts it on Koii
+### Running Tests
+```bash
+# Run a single crawling round test
+yarn test
 ```
 
-For a longer demo and more information please see https://blog.koii.network/How-to-deploy-a-koii-task-in-less-than-5mins/
+## Command Reference
+
+| Command | Options | Description |
+|---------|---------|-------------|
+| `--search` | String | Specify search term/hashtag |
+| `--limit` | Number | Maximum records to retrieve (default: 100) |
+| `--depth` | Number | Recursive exploration depth (default: 3) |
+| `--recursive` | Boolean | Enable/disable recursive gathering |
+
+## Configuration
+
+### Environment Variables
+Copy `.env.sample` to `.env` and configure:
+```
+TWITTER_API_KEY=your_api_key
+TWITTER_API_SECRET=your_api_secret
+```
+
+## Deployment to Koii Network
+
+```bash
+# Build task executable
+yarn webpack
+
+# Deploy to Koii Network
+npx @_koii/create-task-cli@latest
+```
+
+## Project Structure
+- `twitter-task.js`: Primary task implementation
+- `adapters/`: Twitter-specific adapters
+- `tests/`: Test suite for crawler functionality
+- `config-task.yml`: Task configuration
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Commit your changes
+4. Push and submit a Pull Request
+
+Please ensure your code passes all tests and follows project guidelines.
+
+## Legal and Ethical Considerations
+
+This tool is strictly for:
+✅ Personal research
+✅ Public archival projects
+✅ Academic studies
+
+❌ NOT for:
+- Commercial data mining
+- Privacy violation
+- Unauthorized data collection
+
+## License
+
+ISC License. See `LICENSE` file for complete details.
+
+## Resources
+
+- [Koii Network Documentation](https://docs.koii.network)
+- [Task Deployment Guide](https://blog.koii.network/How-to-deploy-a-koii-task-in-less-than-5mins/)
